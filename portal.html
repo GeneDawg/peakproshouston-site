@@ -46,6 +46,16 @@ header{background:rgba(10,10,10,.97);border-bottom:1px solid var(--brd);padding:
 .success{display:none;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);border-radius:4px;padding:32px;text-align:center;margin-top:24px}
 .success h3{font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:900;text-transform:uppercase;color:#22c55e;margin-bottom:8px}
 .success p{font-size:15px;color:rgba(247,247,248,.65)}
+.error{display:none;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);border-radius:4px;padding:20px;text-align:center;margin-top:16px}
+.error h3{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:900;text-transform:uppercase;color:#ef4444;margin-bottom:6px}
+.error p{font-size:14px;color:rgba(247,247,248,.65)}
+.checkbox-group{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-top:6px}
+.checkbox-opt{display:flex;align-items:center;gap:10px;background:rgba(247,247,248,.04);border:1px solid rgba(247,247,248,.12);border-radius:4px;padding:12px 14px;cursor:pointer;transition:all .15s}
+.checkbox-opt:hover{border-color:rgba(247,247,248,.3)}
+.checkbox-opt.selected{border-color:#22c55e;background:rgba(34,197,94,.08)}
+.checkbox-opt input{margin:0;cursor:pointer}
+.fileinput{display:block;width:100%;padding:14px;background:rgba(247,247,248,.04);border:1px dashed rgba(247,247,248,.25);border-radius:4px;color:rgba(247,247,248,.7);font-size:14px;cursor:pointer}
+.fileinput:hover{border-color:rgba(247,247,248,.5)}
 footer{background:var(--sft);border-top:1px solid var(--brd);padding:32px 40px;text-align:center;font-size:13px;color:rgba(247,247,248,.3);margin-top:60px}
 @media(max-width:768px){
   header{padding:0 20px}.hero{padding:36px 20px}.wrap{padding:40px 20px}
@@ -78,6 +88,7 @@ footer{background:var(--sft);border-top:1px solid var(--brd);padding:32px 40px;t
       method="POST"
       data-netlify="true"
       netlify-honeypot="bot-field"
+      enctype="multipart/form-data"
     >
       <input type="hidden" name="form-name" value="job-assignment" />
       <p hidden>
@@ -85,12 +96,12 @@ footer{background:var(--sft);border-top:1px solid var(--brd);padding:32px 40px;t
       </p>
 
       <!-- CONTRACTOR INFO -->
-      <div class="section-title">&#128101; Your Information</div>
+      <div class="section-title">&#128101; Contractor Information</div>
       <div class="fgrid">
-        <div class="fg"><label>Your Company Name *</label><input type="text" name="Contractor_Company" placeholder="ABC Roofing LLC" required></div>
-        <div class="fg"><label>Your Name *</label><input type="text" name="Contractor_Name" placeholder="First Last" required></div>
-        <div class="fg"><label>Your Phone *</label><input type="tel" name="Contractor_Phone" placeholder="(555) 000-0000" required></div>
-        <div class="fg"><label>Your Email *</label><input type="email" name="Contractor_Email" placeholder="you@yourcompany.com" required></div>
+        <div class="fg"><label>Contractor Company Name *</label><input type="text" name="Contractor_Company_Name" placeholder="ABC Roofing LLC" required></div>
+        <div class="fg"><label>Contractor Name *</label><input type="text" name="Contractor_Name" placeholder="First Last" required></div>
+        <div class="fg"><label>Contractor Phone *</label><input type="tel" name="Contractor_Phone" placeholder="(555) 000-0000" required></div>
+        <div class="fg"><label>Contractor Email *</label><input type="email" name="Contractor_Email" placeholder="you@yourcompany.com" required></div>
       </div>
 
       <hr class="section-divider">
@@ -108,8 +119,8 @@ footer{background:var(--sft);border-top:1px solid var(--brd);padding:32px 40px;t
       <!-- ROOF DETAILS -->
       <div class="section-title">&#127959; Roof Details</div>
       <div class="fgrid">
-        <div class="fg"><label>Roof Size (Squares) *</label><input type="number" name="Roof_Squares" placeholder="25" min="1" required></div>
-        <div class="fg"><label>Approximate Roof Age</label>
+        <div class="fg"><label>Roof Squares *</label><input type="number" name="Roof_Squares" placeholder="25" min="1" required></div>
+        <div class="fg"><label>Roof Age</label>
           <select name="Roof_Age">
             <option value="">Select age range</option>
             <option>Under 5 years</option>
@@ -120,7 +131,7 @@ footer{background:var(--sft);border-top:1px solid var(--brd);padding:32px 40px;t
             <option>Unknown</option>
           </select>
         </div>
-        <div class="fg"><label>Roof Type / Material</label>
+        <div class="fg"><label>Roof Type</label>
           <select name="Roof_Type">
             <option value="">Select roof type</option>
             <option>3-Tab Asphalt Shingle</option>
@@ -130,33 +141,20 @@ footer{background:var(--sft);border-top:1px solid var(--brd);padding:32px 40px;t
             <option>Other</option>
           </select>
         </div>
-        <div class="fg"><label>Price Quoted to Homeowner *</label><input type="text" name="Quoted_Price" placeholder="$3,125" required></div>
 
-        <div class="fg full"><label>Is this a two-story home? *</label>
-          <div class="radio-group">
-            <label class="radio-opt"><input type="radio" name="Two_Story" value="Yes" required> Yes &mdash; Two Story</label>
-            <label class="radio-opt"><input type="radio" name="Two_Story" value="No"> No &mdash; Single Story</label>
+        <div class="fg full"><label>Services Requested *</label>
+          <div class="checkbox-group">
+            <label class="checkbox-opt"><input type="checkbox" name="Services_Requested" value="Roof Wash"> Roof Wash</label>
+            <label class="checkbox-opt"><input type="checkbox" name="Services_Requested" value="Shingle Tune Up"> Shingle Tune Up</label>
+            <label class="checkbox-opt"><input type="checkbox" name="Services_Requested" value="Peak 301 Application"> Peak 301 Application</label>
+            <label class="checkbox-opt"><input type="checkbox" name="Services_Requested" value="Homeowner Inspection Report"> Homeowner Inspection Report</label>
           </div>
         </div>
 
-        <div class="fg full"><label>Is the roof pitch steep? (7/12 or greater) *</label>
-          <div class="radio-group">
-            <label class="radio-opt"><input type="radio" name="Steep_Pitch" value="Yes" required> Yes &mdash; Steep Pitch</label>
-            <label class="radio-opt"><input type="radio" name="Steep_Pitch" value="No"> No &mdash; Standard Pitch</label>
-            <label class="radio-opt"><input type="radio" name="Steep_Pitch" value="Unknown"> Not Sure</label>
-          </div>
-        </div>
+        <div class="fg full"><label>Digital Roof Sketch (image upload)</label><input type="file" name="Roof_Sketch" accept="image/*" class="fileinput"></div>
 
-        <div class="fg full"><label>Existing Damage or Repairs Needed?</label>
-          <div class="radio-group">
-            <label class="radio-opt"><input type="radio" name="Existing_Damage" value="Yes"> Yes &mdash; Damage Present</label>
-            <label class="radio-opt"><input type="radio" name="Existing_Damage" value="No"> No &mdash; Roof in Good Condition</label>
-            <label class="radio-opt"><input type="radio" name="Existing_Damage" value="Unknown"> Not Sure</label>
-          </div>
-        </div>
-
-        <div class="fg"><label>Requested Service Date</label><input type="date" name="Requested_Date"></div>
-        <div class="fg full"><label>Scope Notes / Additional Info</label><textarea name="Scope_Notes" rows="4" placeholder="Access issues, gate codes, special instructions, damage description..."></textarea></div>
+        <div class="fg"><label>Quoted Price *</label><input type="text" name="Quoted_Price" placeholder="$3,125" required></div>
+        <div class="fg full"><label>Additional Notes</label><textarea name="Additional_Notes" rows="4" placeholder="Access issues, gate codes, special instructions, damage description..."></textarea></div>
       </div>
 
       <button type="submit" class="btn">Submit Assignment to Peak Pros USA &rarr;</button>
@@ -166,6 +164,10 @@ footer{background:var(--sft);border-top:1px solid var(--brd);padding:32px 40px;t
     <div class="success" id="successMsg">
       <h3>&#10003; Assignment Submitted</h3>
       <p>Your job has been routed to Peak Pros USA at assignment@peakprosusa.com.<br>Expect confirmation within 1 business day.</p>
+    </div>
+    <div class="error" id="errorMsg">
+      <h3>&#9888; Submission Failed</h3>
+      <p>Something went wrong submitting your assignment. Please check your connection and try again, or contact Peak Pros USA at gene@peakprosusa.com / 404-323-1869.</p>
     </div>
   </div>
 </div>
@@ -186,6 +188,42 @@ document.querySelectorAll('.radio-opt input[type=radio]').forEach(function(r){
     this.closest('.radio-opt').classList.add('selected');
   });
 });
+
+// Style checkbox toggles
+document.querySelectorAll('.checkbox-opt input[type=checkbox]').forEach(function(c){
+  c.addEventListener('change', function(){
+    this.closest('.checkbox-opt').classList.toggle('selected', this.checked);
+  });
+});
+
+// Submit handler: fetch to Netlify Forms, show success/error inline
+(function(){
+  var form = document.getElementById('assignForm');
+  var successMsg = document.getElementById('successMsg');
+  var errorMsg = document.getElementById('errorMsg');
+  if(!form) return;
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var btn = form.querySelector('button[type=submit]');
+    var originalText = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = 'Submitting&hellip;';
+    errorMsg.style.display = 'none';
+    var data = new FormData(form);
+    fetch('/', { method: 'POST', body: data })
+      .then(function(res){
+        if(!res.ok) throw new Error('Network response was not ok');
+        form.style.display = 'none';
+        successMsg.style.display = 'block';
+        window.scrollTo({top: 0, behavior: 'smooth'});
+      })
+      .catch(function(){
+        errorMsg.style.display = 'block';
+        btn.disabled = false;
+        btn.innerHTML = originalText;
+      });
+  });
+})();
 
 function doLogout(){
   sessionStorage.removeItem('pptx_auth');
