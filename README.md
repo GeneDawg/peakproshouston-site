@@ -4,9 +4,9 @@ Contractor platform for roof rejuvenation, maintenance, and repair opportunities
 
 ## Files
 
-- `index.html` — Public landing page (hero, how it works, earnings, partner application)
+- `index.html` — Public landing page (hero, how it works, earnings)
 - `login.html` — Contractor access-code login (sessionStorage-gated)
-- `portal.html` — Authenticated assignment-submission form
+- `portal.html` — Authenticated job-assignment submission form
 
 ## Authentication
 
@@ -17,7 +17,7 @@ Simple sessionStorage gate (not security — restricts the form, not the URL):
 
 ## Form routing
 
-Both the partner application (`index.html`) and the job-assignment form (`portal.html`) post to [formsubmit.co](https://formsubmit.co/) and route to `assignment@peakprosusa.com`. There is no Stripe or payment integration in this site.
+The job-assignment form (`portal.html`) uses Netlify Forms (`data-netlify="true"`) and routes to `assignment@peakprosusa.com`. The notification email must be configured in the Netlify dashboard under Forms → Form notifications. There is no Stripe or payment integration in this site.
 
 ## Deploy
 
